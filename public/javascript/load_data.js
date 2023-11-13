@@ -152,6 +152,29 @@ let cargarPrecipitacion = () => {
     selectElement.addEventListener("change", selectListener)
   
   }
+
+ let loadExternaltable =  () =>{
+   let proxyURL = 'https://cors-anywhere.herokuapp.com/'
+   let endpoint = proxyURL + 'https://www.gestionderiesgos.gob.ec/monitoreo-de-inundaciones/'
+    fetch(endpoint)
+      .then(response => {
+        return response.text();
+      })
+
+      .then(xmlContent=>{
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlContent,"text/html");
+        let table_reference = xml.querySelector("#postcontent table")
+        document.getElementById("monitoreo").innerHTML = table_reference.outerHTML
+
+      })
+
+      .catch(console.error)
+
+
+
+  }
+  loadExternaltable()
   
   loadForecastByCity()
 
