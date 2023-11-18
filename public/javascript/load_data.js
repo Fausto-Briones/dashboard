@@ -92,8 +92,8 @@ let cargarPrecipitacion = () => {
         let from = time.getAttribute("from").replace("T", " ")
 
         let humidity = time.querySelector("humidity").getAttribute("value")
-        let windSpeed =  time.querySelector("windSpeed").getAttribute("value")
-        let precipitation =  time.querySelector("precipitation").getAttribute("value")
+        let windSpeed =  time.querySelector("windSpeed").getAttribute("mps")
+        let precipitation =  time.querySelector("precipitation").getAttribute("probability")
         let pressure =  time.querySelector("pressure").getAttribute("value")
         let cloud =  time.querySelector("clouds").getAttribute("value")
 

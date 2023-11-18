@@ -1,0 +1,20 @@
+
+body {
+    background-color: #fffffe !important;
+}
+
+header {
+    background-color: #3da9fc !important;
+}
+
+#forecastbody :nth-child(even){
+    background-color: #eaddcf !important;
+}
+
+#forecastbody :nth-child(odd){
+    background-color: #8bd3dd !important;
+}
+
+div.card{
+    background-color: #fef6e4 !important;
+}
