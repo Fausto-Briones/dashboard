@@ -73,6 +73,39 @@ let cargarPrecipitacion = () => {
         })
 
         .catch(console.error);
+
+
+        let URL1 = 'https://api.open-meteo.com/v1/forecast?latitude=-0.2298&longitude=-78.525&hourly=temperature_2m';
+    fetch(URL1)
+        .then(responseText => responseText.json())
+        .then(responseJSON => {
+
+        let plotRef = document.getElementById('plot2');
+        //Etiquetas del gráfico
+        let labels = responseJSON.hourly.time;
+        //Etiquetas de los datos
+        let data = responseJSON.hourly.temperature_2m;
+
+        //Objeto de configuración del gráfico
+        let config = {
+        type: 'line',
+        data: {
+            labels: labels, 
+            datasets: [
+            {
+                label: 'Temperature [2m]',
+                data: data, 
+            }
+            ]
+        }
+        };
+
+        //Objeto con la instanciación del gráfico
+        let chart1  = new Chart(plotRef, config);
+
+        })
+
+        .catch(console.error);
   }
   let parseXML = (responseText) => {
   
@@ -173,7 +206,29 @@ let cargarPrecipitacion = () => {
 
 
 
-  }
+
+
+    }
+
+
+    let loadExternalTable = () => {
+      let proxy = 'https://cors-anywhere.herokuapp.com/'
+      let URL = proxy + 'https://www.gestionderiesgos.gob.ec/monitoreo-de-inundaciones/'
+    
+
+      fetch(URL)
+      .then(response =>{
+        return response.text()
+      })
+      .then(srcHtml=>{
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(srcHtml,'text/html')
+        const elementoXML = xml.querySelector('#postcontent table')
+        const elementoDOM = document.getElementById('monitoreo')
+        elementoDOM.innerHTML = elementoXML.outerHTML;
+      })
+    };
+    
   loadExternaltable()
   
   loadForecastByCity()
